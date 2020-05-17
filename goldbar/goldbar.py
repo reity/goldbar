@@ -1,16 +1,63 @@
 """GOLDBAR embedded language for genetic designs.
 
 Embedded language for defining and working with genetic
-design spaces.
+design spaces using GOLDBAR.
 """
 
 from __future__ import annotations
 from typing import Sequence
 import doctest
 
+#
+# Foundational data structures shared across the
+# data structures defined in this module.
+#
+
+class label(str):
+    '''
+    Abstract data structure for a part or graph node label.
+    '''
+    pass
+
+class orientation(str):
+    '''
+    Abstract data structure for a part orientation attribute.
+    '''
+    pass
+
+class roles(list):
+    '''
+    Abstract data structure for a list of part roles.
+    '''
+    pass
+
+class part(tuple):
+    '''
+    Abstract data structure for a part. This tuple may have
+    one of the following three configurations:
+     * (label, roles, orientation)
+     * (label, roles)
+     * (label, orientation)
+    '''
+    pass
+
+#
+# Sequences.
+#
+
+class sequence(tuple):
+    '''
+    Abstract data structure for a sequence of parts.
+    '''
+    pass
+
+#
+# GOLDBAR syntax.
+#
+
 class operation(str):
     '''
-    Abstract data structure for an operation.
+    Abstract data structure for a GOLDBAR operation.
     '''
     pass
 
@@ -57,6 +104,34 @@ class goldbar(dict):
 
     def __and__(self: goldbar, other: goldbar) -> goldbar:
         return self.and_(other)
+
+#
+# Design space graphs.
+#
+
+class annotation(set):
+    '''
+    A node annotation: a subset of {'start', 'accept'}.
+    '''
+    pass
+
+class node(tuple):
+    '''
+    Abstract data structure for a design space graph node.
+    '''
+    pass
+
+class edge(tuple):
+    '''
+    Abstract data structure for a design space graph edge.
+    '''
+    pass
+
+class graph(tuple):
+    '''
+    Abstract data structure for a design space graph.
+    '''
+    pass
 
 if __name__ == "__main__":
     doctest.testmod()
